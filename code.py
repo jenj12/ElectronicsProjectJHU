@@ -5,34 +5,29 @@ max_screen_time = 5    #in seconds
 
 while True:
     light = cp.light
-    #if screen is on
-    if light > 20:  
-        #if the timer is off
-        if timer_started == False:
-            lighton_time = time.time()  #get current time in seconds
-            timer_started = True    
-            print("timer started")
+    #if screen is on and timer is off
+        #turn on timer
+        #take start time
 
-        #if screen is off, don't start timer
+    #if the timer is on
+        #if screen is on
+            #calculate time elapsed
+            #if time elapsed > max screen time
+                #blink LEDs, turn on alarm, time's up = true
+                #timer off
+                #start second timer
+        #if screen is off
+            #take time when screen is off
+            #check time elapsed
+            #if time elapsed > 5min ish (if the screen has been off for a while)
+                #turn off timer
 
-        #if the timer is on
-        else:
-            time_elapsed = time.time() - lighton_time
-            if(time_elapsed>max_screen_time):
-                print("You've been staring at the screen for too long! Take a break!")
-                #Blinking red LEDs
-                #Alarm sound
-                #time's up = true
-    
-    #if screen is off
-        #if times's up = true
-            #turn off alarm and led
-            #start second timer (rest timer)
-        #else if timer started = true
-            #set screen off time
-            #if the screen has been off for (5 min), turn timer off
-        #else
-            #dont do anything
+    #if second timer is on
+        #if screen is on
+            #turn on LEDs and alarm again
+        #if screen is off
+            #keep LEDs and alarm off
+
 
         
         
