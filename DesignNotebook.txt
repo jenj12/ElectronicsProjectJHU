@@ -1,0 +1,37 @@
+Problem Definition 
+22-Jul-2022 
+    Use the Circuit Playground Express to design a product that can improve people’s health or lifestyle. 
+
+Brainstorming 
+22-Jul-2022 
+    1. Water reminder 
+        Just a timer  
+    2. Mental Health Manager???  
+    3. Steps counter 
+    4. Earbuds volume controller 
+        somehow connect the CPX to the laptop/earbuds 
+        When volume is too high for a long time turn the volume down/alert the user 
+    5. Screen time controller 
+        Place the CPX facing towards the laptop 
+        Check light intensity 
+        If screen on for too long --> start beeping/turn on LEDs until the screen is turned off (low light) 
+
+Pseudocode and code versions 
+    22-Jul-2022, 23-Jul-2022 
+    Pseudocode 
+        Get light intensity -> store in variable 
+        If light intensity > certain value (computer screen on), start timer1 
+        If timer1 value > 1 hour (for example), play sound & flash LEDs 
+        For testing the value might be lower 
+        If light intensity < certain value (computer screen off), turn off LEDs & stop sound, start timer2 
+        If light intensity > certain value (screen on) AND timer2 < certain value (e.g., 10 minutes), turn on sound, stop timer 2, resume when light intensity is low (screen off) 
+
+Logs 
+23-Jul-2022 
+    Set up circuitpython on board 
+    Created git repo 
+
+Challenges  
+23-Jul-2022 
+    Tried to get circuit python installed on the board. I did it correctly at first but then I found some other documentation that talks about building circuit python, which involved installing a Linux VM and installing build tools on ubuntu. I spent a lot of time trying to get this to work, but I ran into a lot of problems with gcc and eventually gave up after several hours of trying. I then discovered that I do not need to install build tools and simply installing circuit python on the board will work. Will start writing code tomorrow. 
+    This is the documentation I followed: https://learn.adafruit.com/building-circuitpython/linux 
