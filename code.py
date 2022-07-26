@@ -2,24 +2,28 @@ from adafruit_circuitplayground import cp
 import time
 timer1_on = False
 timer2_on = False
-max_screen_time = 5    #in seconds
-break_time = 60     #in seconds
+max_screen_time = 10    #in seconds
+break_time = 5     #in seconds
+break_started = False
 def notify():
     cp.pixels.fill((50, 0, 0)) #need to add specific instructions: turn led on, blink, sound
 
 def off():
-    cp.pixels.fill((50, 0, 0)) # turn everything off
+    cp.pixels.fill((0, 0, 0)) # turn everything off
 
 while True:
     light = cp.light
     threshold = 20
 
     #if screen is on and timer is off
-    if light > threshold and timer1_on == False:
+    if light > threshold:
+        if break_started == False and timer1_on == False :
         #turn on timer
-        timer1_on = True
-        #take start time
-        initial_time = time.time()
+            timer1_on = True
+            #take start time
+            initial_time = time.time()
+            print("timer on")
+            print(initial_time)
 
     #if the timer is on
     if timer1_on == True:
@@ -29,34 +33,40 @@ while True:
             time_elapsed = time.time() - initial_time
             #if time elapsed > max screen time
             if time_elapsed > max_screen_time:
+                print("time's up!")
                 #blink LEDs, turn on alarm, time's up = true
                 notify()
                 #timer off
                 timer1_on = False
-                #start second timer
-                timer2_on = True
-                
-        #if screen is off
-        elif light < threshold:
-            #take time when screen is off
+                break_started = True
+                print("break started")
+        
+    if timer2_on == False and break_started == True:   
+        if light < threshold:
+            print("start rest")
+            off()
+            #start second timer
+            timer2_on = True
             time_screen_off = time.time()
-            #check time elapsed
-            t_elapsed = time.time() - time_screen_off
-            #if time elapsed > 5min ish (if the screen has been off for a while)
-            if t_elapsed > break_time:
-                #turn off timer
-                timer2_on == False
+            print(time_screen_off)
+
 
     #if second timer is on
     if timer2_on == True:
         #if screen is on
         if light > threshold:
+            print("go back to rest!")
             #turn on LEDs and alarm again
             notify()
-        #if screen is off
         else:
-            #keep LEDs and alarm off
             off()
+            t_elapsed = time.time() - time_screen_off
+            #if time elapsed > 5min ish (if the screen has been off for a while)
+            if t_elapsed > break_time:
+                print("rest over")
+                #turn off timer
+                timer2_on = False
+                break_started = False
 
 
 
