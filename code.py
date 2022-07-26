@@ -16,7 +16,7 @@ def off():
 
 while True:
     light = cp.light
-    threshold = 10
+    threshold = 13
 
     #if screen is on and timer is off
     if light > threshold:
