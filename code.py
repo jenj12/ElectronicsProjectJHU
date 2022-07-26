@@ -2,8 +2,8 @@ from adafruit_circuitplayground import cp
 import time
 timer1_on = False
 timer2_on = False
-max_screen_time = 10    #in seconds
-break_time = 5     #in seconds
+max_screen_time = 1200    #in seconds
+break_time = 20     #in seconds
 break_started = False
 def notify():
     cp.pixels.fill((50, 0, 0)) #need to add specific instructions: turn led on, play sound
