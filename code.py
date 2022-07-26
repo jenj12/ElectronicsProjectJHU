@@ -6,7 +6,9 @@ max_screen_time = 10    #in seconds
 break_time = 5     #in seconds
 break_started = False
 def notify():
-    cp.pixels.fill((50, 0, 0)) #need to add specific instructions: turn led on, blink, sound
+    cp.pixels.fill((50, 0, 0)) #need to add specific instructions: turn led on, play sound
+    cp.play_tone(260, 0.5)
+    time.sleep(0.2)
 
 def off():
     cp.pixels.fill((0, 0, 0)) # turn everything off
@@ -34,8 +36,6 @@ while True:
             #if time elapsed > max screen time
             if time_elapsed > max_screen_time:
                 print("time's up!")
-                #blink LEDs, turn on alarm, time's up = true
-                notify()
                 #timer off
                 timer1_on = False
                 break_started = True
@@ -49,6 +49,8 @@ while True:
             timer2_on = True
             time_screen_off = time.time()
             print(time_screen_off)
+        else:
+            notify()
 
 
     #if second timer is on
